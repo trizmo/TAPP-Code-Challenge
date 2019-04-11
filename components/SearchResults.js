@@ -27,68 +27,17 @@ export default class SearchResults extends Component {
       .then(resp => this.setState({ placesResults: resp }))
   }
 
-  // displayResults = (props) => {
-  //   // console.log("UPDATE!")
-  //   return (
-  //     this.state.placesResults.predictions ? (this.state.placesResults.predictions.map(cand => (
-  //       <Row key={cand.id}>
-  //         {/* <Col size={90}> */}
-  //         <Text
-  //           onPress={() => this.props.navigation.navigate("Search")}
-  //           style={styles.results}>
-  //           {cand.description}
-  //         </Text>
-  //         {/* <Button title="place-details" onPress={() => this.props.navigation.navigate("PlaceDetails")}><Text>PlaceDetails</Text></Button> */}
-  //         {/* </Col> */}
-  //         {/* <Col size={10}>
-  //           <Ionicons name={"ios-add"} onPress={() => this.props.navigation.navigate("Bookmarks")} size={33} color="#020202" />
-  //         </Col> */}
-  //       </Row>
-  //     ))) : (null)
-  //   )
-  // }
-
-  // render(props) {
 
 
-  //   return (
-  //     <Grid>
-  //       {/* <Text> Search Results </Text>
-  //       <Text> Search {this.props.search} </Text> */}
-  //       {/* <Button title="fetch-data" onPress={this.getData.bind(this)}><Text>fetch data</Text></Button> */}
-  //       {/* {this.getData()} */}
-  //       {this.displayResults()}
-  //     </Grid>
-  //   )
-  // }
-
-  handleTouchablePress = () => {
-    this.props.navigation.navigate("PlaceDetails")
-  }
-
-  render(props) {
-
-
+  render() {
     return (
       <Grid>
 
         {this.state.placesResults.predictions ? (this.state.placesResults.predictions.map(cand => (
-          <Row key={cand.id} onPress={() => this.props.navigation.navigate("PlaceDetails")}>
-            {/* <Col size={90}> */}
-            <List>
+          <Row key={cand.id} >
 
-              <ListItem
-                // onPress={() => this.handleTouchablePress()}
-                style={styles.results}
-              >
-               <Text>{cand.description}</Text>
-              </ListItem>
-            </List>
-            {/* <Button title="place-details" onPress={() => this.props.navigation.navigate("PlaceDetails")}><Text>PlaceDetails</Text></Button> */}
-            {/* </Col> */}
-            {/* <Col size={10}>
-            <Ionicons name={"ios-add"} onPress={() => this.props.navigation.navigate("Bookmarks")} size={33} color="#020202" />
-          </Col> */}
+               <Text onPress={() => this.props.navigation.navigate("PlaceDetails", {params: cand.place_id})} >{cand.description} </Text>
+
           </Row>
         ))) : (null)}
       </Grid>
