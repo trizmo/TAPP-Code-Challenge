@@ -10,24 +10,23 @@ export default class SearchScreen extends Component {
     search: ""
   }
 
+  static navigationOptions = {
+    title: "Search"
+  }
+
   onChange = e => {
-    // console.log(e)
     this.setState({
       search: e
     })
   }
 
-
   render() {
     return (
       <Container>
-        {/* <Header searchBar rounded> */}
-        {/* <SearchBar onChange={() => this.onChange()}/> */}
         <Item>
           <Icon name="ios-search" />
           <Input placeholder="Search" name="search" onChangeText={(text) => this.onChange(text)} />
         </Item>
-        {/* </Header> */}
         <SearchResults search={this.state.search} navigation={this.props.navigation} bookmarks={this.props.bookmarks}/>
       </Container>
     );

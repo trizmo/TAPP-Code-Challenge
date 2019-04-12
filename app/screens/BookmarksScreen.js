@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, TouchableOpacity, ImageBackground, View } from 'react-native'
-import { Text, Container, Button, Content } from 'native-base'
+import { StyleSheet, ImageBackground } from 'react-native'
+import { Text, Container, Button, Content, View } from 'native-base'
 import { Grid, Row, Col } from 'react-native-easy-grid'
 import { Ionicons } from '@expo/vector-icons'
-import bg from '../assets/bg/bg.jpg'
-import BookmarksCarousel from '../components/BookmarksCarousel';
 
+// ASSET IMPORT
+import bg from '../assets/bg/bg.jpg'
+
+// COMPONENTS
+import BookmarksCarousel from '../components/BookmarksCarousel';
 
 export default class BookmarksScreen extends Component {
   constructor(props) {
@@ -17,7 +20,7 @@ export default class BookmarksScreen extends Component {
   }
 
   static navigationOptions = {
-    title: ""
+    title: "Bookmarks"
   }
 
   async componentWillMount() {
@@ -30,50 +33,49 @@ export default class BookmarksScreen extends Component {
   }
 
   handleAddToBookmarks = (placeDetails) => {
-    const bookmarks = this.state.bookmarks
-    for (let i = 0; i < bookmarks.length; i++) {
-      if (bookmarks[i].place_id !== placeDetails.place_id) {
-        bookmarks.push(placeDetails)
-      } else {
-        bookmarks.splice(i, 1)
-      }
+    const index = this.state.bookmarks.indexOf(placeDetails)
+    if (index < 0) {
+      this.state.bookmarks.push(placeDetails)
+    } else {
+      this.state.bookmarks.splice(index, 1)
     }
-    // console.log("index of " + params + " is: " + index)
-
-    this.setState({ bookmarks }, () => console.log(this.state))
+    this.setState( {bookmarks: [...this.state.bookmarks]} , () => console.log("handleAddToBookmarks state: ", this.state))
   }
 
 
   render() {
-    // console.log(this.state)
     return (
       <ImageBackground source={bg} style={{ width: "100%", height: "100%" }}>
         {this.state.fontLoaded ? (
           <Container style={styles.container}>
             <Grid>
-              <Row size={50}>
+              <Row size={25}>
                 <Col style={styles.welcomeMsgContainer}><Text style={styles.welcomeMsg}>Good morning!</Text></Col>
                 <Col
                   style={styles.addButton}
                   onPress={() => this.props.navigation.navigate("Search", { bookmarks: this.state.bookmarks, handleAddToBookmarks: this.handleAddToBookmarks })}
-                // bookmarks={this.state.bookmarks} 
-                // handleAddToBookmarks={this.handleAddToBookmarks}
                 >
                   <Ionicons name={"ios-add"} size={130} color="#fff" />
                 </Col>
               </Row>
               <Row size={50} style={styles.welcomeMsgContainer}>
-                <Container>
-                  <View>
 
-                    {/* <BookmarksCarousel bookmarks={this.state.bookmarks}/> */}
-                    {this.state.bookmarks.length > 0 ? <BookmarksCarousel bookmarks={this.state.bookmarks} /> : <Text style={styles.welcomeMsg}>No Bookmarks!</Text>}
-                  </View>
-                </Container>
+                {/* CAROUSEL NOT WORKING PROPERLY */}
+                {/* TEMPERAORY DISPLAYING LENGTH OF ARRAY */}
+
+                {/* <Container> */}
+                {/* <View> */}
+                {/* <BookmarksCarousel bookmarks={this.state.bookmarks}/> */}
+                {/* {this.state.bookmarks.length > 0 ? <BookmarksCarousel bookmarks={this.state.bookmarks} /> : <Text style={styles.welcomeMsg}>No Bookmarks!</Text>} */}
+                {/* </View> */}
+                {/* </Container> */}
+
+                {this.state.bookmarks.length > 0 ? <Text style={styles.welcomeMsg}>{this.state.bookmarks.length} Bookmarks Saved</Text> : <Text style={styles.welcomeMsg}>No Bookmarks!</Text>}
+
               </Row>
-              {/* <Row size={25}>
+              <Row size={25}>
                 <Text>Your Current Location:</Text>
-              </Row> */}
+              </Row>
             </Grid>
           </Container>
         ) : (null)}
@@ -89,10 +91,8 @@ const styles = StyleSheet.create({
     color: "red"
   },
   addButton: {
-    // display: "flex",
     justifyContent: "center",
     alignItems: "center"
-
   },
   container: {
     backgroundColor: "transparent"
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     color: "#fff"
   },
   welcomeMsgContainer: {
-    // justifyContent: "center",
-    // alignItems: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
 })

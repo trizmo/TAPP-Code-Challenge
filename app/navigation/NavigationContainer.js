@@ -22,7 +22,7 @@ const StackNavigator = createStackNavigator({
       borderBottomColor: "#dcdcdc"
     },
     headerTitleStyle: {
-      color: "#8EF9F3",
+      color: "#0B3142",
     }
   },
   headerLayoutPreset: "center",
