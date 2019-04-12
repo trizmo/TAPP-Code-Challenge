@@ -12,17 +12,7 @@ export default class BookmarksScreen extends Component {
     super(props);
     this.state = {
       fontLoaded: false,
-      bookmarks: [{
-        html_attributions: [ ],
-        result: {
-        formatted_address: "508 W 7th St, Los Angeles, CA 90014, USA",
-        formatted_phone_number: "(213) 614-8888",
-        name: "Subway Restaurants",
-        photos:  [],
-        rating: 4
-        },
-        status: "OK"
-        }],
+      bookmarks: [],
     }
   }
 
@@ -39,27 +29,29 @@ export default class BookmarksScreen extends Component {
     this.setState({ fontLoaded: true })
   }
 
-  handleAddToBookmarks = (params) => {
-    const index = this.state.bookmarks.indexOf(params.place_id)
-    // const bookmarks = { ...this.state.bookmarks }
-    if (index < 0) {
-      // console.log("index of " + params + " is: " + index)
-      this.state.bookmarks.push(params.place_id)
-    } else {
-      this.state.bookmarks.splice(index, 1)
+  handleAddToBookmarks = (placeDetails) => {
+    const bookmarks = this.state.bookmarks
+    for (let i = 0; i < bookmarks.length; i++) {
+      if (bookmarks[i].place_id !== placeDetails.place_id) {
+        bookmarks.push(placeDetails)
+      } else {
+        bookmarks.splice(i, 1)
+      }
     }
+    // console.log("index of " + params + " is: " + index)
 
-    this.setState(this.state.bookmarks)
+    this.setState({ bookmarks }, () => console.log(this.state))
   }
 
 
   render() {
+    // console.log(this.state)
     return (
       <ImageBackground source={bg} style={{ width: "100%", height: "100%" }}>
         {this.state.fontLoaded ? (
           <Container style={styles.container}>
             <Grid>
-              <Row size={25}>
+              <Row size={50}>
                 <Col style={styles.welcomeMsgContainer}><Text style={styles.welcomeMsg}>Good morning!</Text></Col>
                 <Col
                   style={styles.addButton}
@@ -71,14 +63,17 @@ export default class BookmarksScreen extends Component {
                 </Col>
               </Row>
               <Row size={50} style={styles.welcomeMsgContainer}>
-                <View>
-                  {/* <BookmarksCarousel bookmarks={this.state.bookmarks}/> */}
-                  {this.state.bookmarks.length > 0 ? <BookmarksCarousel bookmarks={this.state.bookmarks} /> : <Text style={styles.welcomeMsg}>No Bookmarks!</Text>}
-                </View>
+                <Container>
+                  <View>
+
+                    {/* <BookmarksCarousel bookmarks={this.state.bookmarks}/> */}
+                    {this.state.bookmarks.length > 0 ? <BookmarksCarousel bookmarks={this.state.bookmarks} /> : <Text style={styles.welcomeMsg}>No Bookmarks!</Text>}
+                  </View>
+                </Container>
               </Row>
-              <Row size={25}>
+              {/* <Row size={25}>
                 <Text>Your Current Location:</Text>
-              </Row>
+              </Row> */}
             </Grid>
           </Container>
         ) : (null)}
@@ -107,7 +102,7 @@ const styles = StyleSheet.create({
     color: "#fff"
   },
   welcomeMsgContainer: {
-    justifyContent: "center",
-    alignItems: "center"
+    // justifyContent: "center",
+    // alignItems: "center"
   },
 })

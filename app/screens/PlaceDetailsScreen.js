@@ -38,9 +38,9 @@ export default class PlaceDetailsScreen extends Component {
           // console.log(this.state)
           const photoRef = this.state.placeDetails.result.photos["0"].photo_reference
           // photoRef ? (console.log("yaaaaaaaay", photoRef)) : (null)
-          fetch(placePhotoRef + photoRef + "&key="+ key)
-            .then(response => response.json())
-            .then(resp => console.log(resp))
+          // fetch(placePhotoRef + photoRef + "&key="+ key)
+          //   .then(response => response.json())
+          //   .then(resp => console.log(resp))
         })
       })
   }
@@ -80,7 +80,7 @@ export default class PlaceDetailsScreen extends Component {
               </Row>
               <Row style={styles.infoLow}>
 
-                <Button onPress={() => handleAddToBookmarks(params)} style={styles.addButton}><Text>Add to Bookmarks</Text></Button>
+                <Button onPress={() => handleAddToBookmarks(this.state.placeDetails.place_id)} style={styles.addButton}><Text>Add to Bookmarks</Text></Button>
 
                 <Text style={styles.address}>{this.state.placeDetails.result.formatted_address}</Text>
 
@@ -120,6 +120,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     flexGrow: 1,
+    backgroundColor: "lightgrey",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    padding: 5,
   },
   nameText: {
     fontSize: 25,
@@ -130,20 +134,20 @@ const styles = StyleSheet.create({
   address: {
     fontSize: 18,
     padding: 5,
-    color: "#fff"
+    color: "#020202"
   },
   rating: {
     fontSize: 16,
     fontWeight: "700",
     padding: 5,
-    color: "#0B3142"
+    color: "#0B3142",
   },
   ratingContainer: {
     borderRadius: 50,
     backgroundColor: "lightgrey",
     justifyContent: "center",
     alignItems: "center",
-
+    margin: 5,
   },
   addButton: {
     alignSelf: "center",

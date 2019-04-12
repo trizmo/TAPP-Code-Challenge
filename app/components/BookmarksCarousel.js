@@ -35,21 +35,21 @@ export default class BookmarksCarousel extends Component {
           dataSource={this.props.bookmarks}
           renderItem={bookmark =>
             <Card style={{ elevation: 3, backgroundColor: "red" }}>
-              <CardItem>
-                <Left>
+              {/* <CardItem> */}
+                {/* <Left> */}
                   {/* <Thumbnail source={item.image} /> */}
-                  <Body>
-                    <Text>{bookmark.name}</Text>
-                  </Body>
-                </Left>
-              </CardItem>
+                  {/* <Body> */}
+                    {/* <Text>{bookmark.result.name}</Text> */}
+                  {/* </Body> */}
+                {/* </Left> */}
+              {/* </CardItem> */}
               <CardItem cardBody>
                 <Text note>card body</Text>
                 {/* <Text style={{ height: 300, flex: 1 }} source={bookmark} /> */}
               </CardItem>
               <CardItem>
                 <Icon name="star" style={{ color: '#020202' }} />
-                <Text>bottom card text</Text>
+                <Text>{bookmark.result.name}</Text>
               </CardItem>
             </Card>
           }
