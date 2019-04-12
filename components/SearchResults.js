@@ -30,13 +30,20 @@ export default class SearchResults extends Component {
 
 
   render() {
+    const bookmarks = this.props.navigation.getParam('bookmarks')
+    const handleAddToBookmarks = this.props.navigation.getParam('handleAddToBookmarks')
     return (
       <Grid>
 
         {this.state.placesResults.predictions ? (this.state.placesResults.predictions.map(cand => (
           <Row key={cand.id} >
 
-               <Text onPress={() => this.props.navigation.navigate("PlaceDetails", {params: cand.place_id})} >{cand.description} </Text>
+               <Text onPress={() => this.props.navigation.navigate("PlaceDetails", {params: cand, bookmarks: bookmarks, handleAddToBookmarks: handleAddToBookmarks})} 
+                handleAddToBookmarks={this.props.handleAddToBookmarks}
+                place={cand}
+               >
+                {cand.description}
+               </Text>
 
           </Row>
         ))) : (null)}

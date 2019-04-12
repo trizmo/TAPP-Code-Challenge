@@ -28,7 +28,7 @@ export default class SearchScreen extends Component {
           <Input placeholder="Search" name="search" onChangeText={(text) => this.onChange(text)} />
         </Item>
         {/* </Header> */}
-        <SearchResults search={this.state.search} navigation={this.props.navigation}/>
+        <SearchResults search={this.state.search} navigation={this.props.navigation} bookmarks={this.props.bookmarks}/>
       </Container>
     );
   }
