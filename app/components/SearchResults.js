@@ -3,12 +3,12 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text, Button, List, ListItem } from 'native-base'
 import { Ionicons } from '@expo/vector-icons'
 import { Grid, Row, Col } from 'react-native-easy-grid'
+import placeAPI from '../config/placeAPI'
 
-const placeSearchAPI = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@47.6918452,-122.2226413&key="
+// API CONFIG
 const placeAutocompleteAPI = "https://maps.googleapis.com/maps/api/place/autocomplete/json?sessiontoken=1234567890&key="
-const key = "AIzaSyA4EPg2DZIsrS6_OwTpYo-afD1mjq_IWBI&input="
-const input = "mongolian%20grill"
-const placeAutocompleteInput = "1600+Amphitheatre"
+const apiKey = placeAPI.APIKEY
+
 
 export default class SearchResults extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class SearchResults extends Component {
   }
 
   componentWillReceiveProps() {
-    fetch(placeAutocompleteAPI + key + this.props.search)
+    fetch(placeAutocompleteAPI + apiKey + "&input=" +this.props.search)
       .then(response => response.json())
       .then(resp => this.setState({ placesResults: resp }))
   }

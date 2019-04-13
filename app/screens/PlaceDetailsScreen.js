@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
 import { Text, Button, Container, Grid, Row, Col } from 'native-base';
 import bg from '../assets/bg/bg.jpg'
+import placeAPI from '../config/placeAPI'
 
 
-const placeSearchAPI = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@47.6918452,-122.2226413&key="
-const placeAutocompleteAPI = "https://maps.googleapis.com/maps/api/place/autocomplete/json?sessiontoken=1234567890&key="
+// API CONFIG
 const placeDetailsAPI = "https://maps.googleapis.com/maps/api/place/details/json?fields=name,rating,formatted_phone_number,formatted_address,photo,place_id&key="
-const key = "AIzaSyA4EPg2DZIsrS6_OwTpYo-afD1mjq_IWBI"
-const input = "mongolian%20grill"
-const placeAutocompleteInput = "1600+Amphitheatre"
-const placeID = "ChIJh7FIUrTHwoARp_VawUlSQAY&"
-const placePhotoRef = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" // don't forget to add &key= after reference, followed by API KEY last
-
+const apiKey = placeAPI.APIKEY
 
 
 export default class PlaceDetailsScreen extends Component {
@@ -31,7 +26,7 @@ export default class PlaceDetailsScreen extends Component {
 
 
   componentDidMount() {
-    fetch(placeDetailsAPI + key + "&placeid=" + params.place_id)
+    fetch(placeDetailsAPI + apiKey + "&placeid=" + params.place_id)
       .then(response => response.json())
       .then(resp => {
         this.setState({ placeDetails: resp }, () => {
