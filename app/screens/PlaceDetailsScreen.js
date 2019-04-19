@@ -4,9 +4,12 @@ import { Text, Button, Container, Grid, Row, Col } from 'native-base';
 import bg from '../assets/bg/bg.jpg'
 import placeAPI from '../config/placeAPI'
 
+// COMPONENTS
+import StaticMap from '../components/StaticMap'
+
 
 // API CONFIG
-const placeDetailsAPI = "https://maps.googleapis.com/maps/api/place/details/json?fields=name,rating,formatted_phone_number,formatted_address,photo,place_id&key="
+const placeDetailsAPI = "https://maps.googleapis.com/maps/api/place/details/json?fields=geometry,name,rating,formatted_phone_number,formatted_address,photo,address_component,place_id&key="
 const apiKey = placeAPI.APIKEY
 
 
@@ -63,6 +66,7 @@ export default class PlaceDetailsScreen extends Component {
 
                 <Text style={styles.address}>{this.state.placeDetails.result.formatted_address}</Text>
                 {/* static map image to be used here */}
+                <StaticMap placeDetails={this.state.placeDetails}/>
               </Row>
             </Grid>
             ) :

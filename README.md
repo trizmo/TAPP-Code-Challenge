@@ -1,3 +1,10 @@
+# Componenents that need to be finished
+- static map
+- data persistance (asyncStorage)
+- redux
+- carousel
+
+
 # Code-Challenge
 
 TAPP Code Challenge for Software Engineer Candidates
@@ -29,8 +36,6 @@ Additional: [My LinkedIn](https://www.linkedin.com/in/tristan-perera)
 
 ![tapp-qr-code](./assets/expoqr.png)
 
-
-
 ## My Overview
 First, I wanted to thank you for allowing me to accept this challenge. This was fun, and kinda frustrating at times lol. First I was debating on how I wanted to build this out. Should I build it with a back end server to help with database persistance and with auth? Should I use state management tools like Context or Redux? I know this could have easily blown out of control for such a tiny app, so I wanted to take it a little easier (or so I thought).
 
@@ -45,8 +50,6 @@ I bit off much more than I could have chewed, but I wasn't done! I took a step b
 ### What's Next
 * There's no data persistance. I'd like to add Firebase DB, but ideally, I would like to create a NodeJS server and utilize MongoDB to hold all our data.  
 * Authorization / User Login
-* The `add to bookmarks` and `remove from bookmarks` don't properly work. 
-
 
 
 
